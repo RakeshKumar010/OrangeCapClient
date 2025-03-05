@@ -1,0 +1,78 @@
+@import "tailwindcss";
+@theme{
+  --color-logoColor:#ff7c0c;
+  --color-bgblackColor:#141416;
+  --color-accent-700:#1a1a1c; 
+}
+
+body{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+@font-face {
+  font-family: "CustomFont";
+  src: url("./assets/fonts/customfontbold.ttf") format("truetype");
+}
+
+.font-secondary {
+  font-family: "CustomFont";
+}
+
+.animate-fadeInDown {
+  animation: fadeInDown 1s 0s both;
+}
+
+@keyframes fadeInDown {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-float-bob-x {
+  animation: float-bob-x 2s linear infinite;
+}
+@keyframes float-bob-x {
+  0% {
+    transform: translateX(-20px);
+  }
+  50% {
+    transform: translateX(-10px);
+  }
+  100% {
+    transform: translateX(-20px);
+  }
+}
+
+@keyframes infinite-scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-65%);
+  }
+}
+
+.animate-infinite-scroll {
+  animation: infinite-scroll 20s linear infinite;
+  display: flex;
+}
+
+.animate-rotate-me {
+  animation: rotate-me 25s linear infinite;
+}
+
+@keyframes rotate-me {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(1turn);
+  }
+}
