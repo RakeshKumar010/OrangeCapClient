@@ -6,7 +6,7 @@ const Form = () => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
-    number: "",
+    phone: "",
     subject: "",
     message: "",
   });
@@ -32,7 +32,7 @@ const Form = () => {
       setFormData({
         name: "",
         email: "",
-        number: "",
+        phone: "",
         subject: "",
         message: "",
       });
@@ -57,7 +57,7 @@ const Form = () => {
         className="grid grid-cols-1 gap-5 lg:grid-cols-2 lg:gap-[30px]"
         onSubmit={handleSubmit}
       >
-        {["name", "email", "number", "subject"].map((field, index) => (
+        {["name", "email", "phone", "subject"].map((field, index) => (
           <div key={index}>
             <div className="relative w-full">
               <input

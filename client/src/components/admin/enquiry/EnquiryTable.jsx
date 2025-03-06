@@ -96,15 +96,15 @@ const EnquiryTable = ({ searchValue }) => {
 
           // Sort based on filter criteria
           if (filter === "Recent") {
-            setData(filteredResult);
-          } else {
             setData(filteredResult.reverse());
+          } else {
+            setData(filteredResult);
           }
         } else {
           if (filter === "Recent") {
+            result = result.reverse();
             setData(result);
           } else {
-            result = result.reverse();
             setData(result);
           }
         }

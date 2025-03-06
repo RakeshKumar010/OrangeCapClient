@@ -1,5 +1,6 @@
 import AOS from "aos";
 import "aos/dist/aos.css";
+import Cookies from "js-cookie";
 
 import { useEffect, useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
@@ -20,21 +21,30 @@ import Enquiry from "../components/admin/pages/Enquiry";
 import MyProfile from "../components/admin/pages/MyProfile";
 import User from "../components/admin/pages/User";
 import AddUser from "../components/admin/pages/AddUser";
+import PageTracker from "../components/global/PageTracker";
+import CookieConsent from "../components/global/CookieConsent";
 
 const Layout = () => {
   const [isAdmin, setIsAdmin] = useState(false);
-
+  const [showPopup, setShowPopup] = useState(false);
   useEffect(() => {
     AOS.init({ duration: 1000, once: true });
     const user = localStorage.getItem("user");
     if (user) {
       setIsAdmin(true);
     }
+    const consent = Cookies.get("cookieConsent"); // Check if user has already accepted/declined
+    if (!consent) {
+      setTimeout(() => {
+        setShowPopup(true);
+      }, 3000);
+    }
   }, []);
  
   return (
     <>
       <BrowserRouter>
+      <PageTracker />
       <ScrollToTop />
         <Routes>
           <Route path="/" element={<Home />} />
@@ -70,6 +80,7 @@ const Layout = () => {
             <Route path="my-profile" element={<MyProfile />} />
           </Route>
         </Routes>
+        {showPopup?<CookieConsent showPopup={showPopup} setShowPopup={setShowPopup}/>:null}
       </BrowserRouter>
     </>
   );

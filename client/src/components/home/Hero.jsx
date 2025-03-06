@@ -1,7 +1,7 @@
  
 import { Link } from "react-router-dom";
 import ShapeBottom from "../../assets/image/home/hero/shape-bottom.webp";
-import BgImg from "../../assets/image/home/hero/hero-3.jpg";
+import BgImg from "../../assets/image/home/hero/HeroImg.jpg";
  
 
 const Hero = () => {
@@ -84,7 +84,7 @@ const Hero = () => {
       />
 
       <div
-        className=" absolute  w-full top-10 md:top-0 bottom-0   left-0 right-0 bg-center bg-cover bg-no-repeat "
+        className=" absolute grayscale   w-full top-10 md:top-0 bottom-0   left-0 right-0 bg-center bg-cover bg-no-repeat "
         style={{ backgroundImage: `url(${BgImg})` }}
       ></div>
       <div className="absolute top-0 left-0 right-0 bottom-0 bg-gradient-to-t to-white/10 from-white   "></div>
