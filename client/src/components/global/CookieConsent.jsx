@@ -22,7 +22,7 @@ const CookieConsent = ({ setShowPopup }) => {
       <div className="flex gap-2">
         <button
           onClick={handleAccept}
-          className="bg-yellow-500 text-black cursor-pointer px-4 py-2 rounded-md font-semibold"
+          className="bg-logoColor text-black cursor-pointer px-4 py-2 rounded-md font-semibold"
         >
           Accept
         </button>
