@@ -12,7 +12,7 @@ const CookieConsent = ({ setShowPopup }) => {
   };
 
   return (
-    <div className="fixed z-10 bottom-4 left-4 right-4 bg-gray-900 text-white p-4 rounded-lg shadow-lg flex items-center justify-between">
+    <div className="fixed z-10 bottom-4 left-4 right-4 bg-gray-900 text-white p-4 rounded-lg shadow-lg flex flex-wrap gap-5 items-center justify-between">
       <p className="text-sm mr-4">
         We use cookies to improve your experience. By using our site, you agree to our{" "}
         <a href="/privacy-policy" className="underline">
