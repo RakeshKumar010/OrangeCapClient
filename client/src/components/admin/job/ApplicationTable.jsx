@@ -236,7 +236,10 @@ const ApplicationTable = ({ searchValue }) => {
                     position
                   </th>
                   <th scope="col" className="px-6 py-3 ">
-                  Current Location
+                  Location
+                  </th>
+                  <th scope="col" className="px-6 py-3">
+                    Status
                   </th>
                   <th scope="col" className="px-6 py-3 ">
                     Action
@@ -248,9 +251,11 @@ const ApplicationTable = ({ searchValue }) => {
                   data.map((value, index) => {
                     return (
                       <>
-                        <tr
+                       <tr
                           key={index}
-                          className="bg-white border-b text-center hover:bg-gray-50 "
+                          className={` border-b     ${
+                            value.status == "Pending" ? "bg-white" : "bg-gray-200"
+                          }`}
                         >
                           <td className="w-4 p-4">
                             <div className="flex items-center">
@@ -289,6 +294,9 @@ const ApplicationTable = ({ searchValue }) => {
                           </td>
                           <td className="px-6 py-4 text-center">
                             {value.currentLocation ? value.currentLocation : "no value"}
+                          </td>
+                          <td className="px-6 py-4 text-center">
+                            {value.status ? value.status : "no value"}
                           </td>
                           <td className="px-6 mx-auto text-center flex items-center justify-center py-4 text-nowrap">
                           <MdOutlinePreview

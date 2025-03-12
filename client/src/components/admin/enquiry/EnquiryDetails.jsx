@@ -1,47 +1,49 @@
 import React, { useState } from "react";
-import { FiFlag, FiMail, FiPhone, FiBriefcase, FiUserCheck, FiMapPin, FiLinkedin, FiGlobe, FiMessageCircle, FiFileText, FiClock } from "react-icons/fi";
- 
+import {
+  FiMail,
+  FiPhone,
+  FiCalendar,
+  FiClock,
+  FiMessageSquare,
+  FiFlag,
+} from "react-icons/fi";
+import { IoLocationOutline } from "react-icons/io5";
 import Swal from "sweetalert2";
 const baseUrl = import.meta.env.VITE_APP_URL;
-import { TbStatusChange } from "react-icons/tb"; 
+import { TbStatusChange } from "react-icons/tb";
+import { LuMapPinned, LuMessageCircleMore } from "react-icons/lu";
+import { MdMessage, MdSubject } from "react-icons/md";
+const EnquiryDetails = ({ setIsOpenEnquiry, isOpenEnquiry }) => {
+  const { _id, name, email, phone, subject, message, status, assignUser } =
+    isOpenEnquiry;
 
-const ApplicationDetails = ({ isOpenApplication, setIsOpenApplication }) => {
-  const {
-    _id,
-    firstName,
-    lastName,
-    email,
-    phone,
-    position,
-    experience,
-    currentLocation,
-    linkedin,
-    portfolio,
-    coverLetter,
-    resume,
-    addedTime,
-    status,
-     
-  } = isOpenApplication;
-
-  const [selectedStatus, setSelectedStatus] = useState(status); 
+  const [selectedStatus, setSelectedStatus] = useState(status);
+  const [selectedUser, setSelectedUser] = useState(assignUser);
 
   // Handle status change locally
   const handleCheckboxChange = (newStatus) => {
     setSelectedStatus(newStatus);
   };
- 
+  const handleAssignCheckboxChange = (userType) => {
+    setSelectedUser(
+      (prevSelected) =>
+        prevSelected.includes(userType)
+          ? prevSelected.filter((user) => user !== userType) // Remove if already selected
+          : [...prevSelected, userType] // Add if not selected
+    );
+  };
 
   // Update status when "Update" button is clicked
   const handleStatusUpdate = async () => {
     try {
-      const response = await fetch(`${baseUrl}/edit-application/${_id}`, {
+      const response = await fetch(`${baseUrl}/edit-enquiry/${_id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          status: selectedStatus, 
+          status: selectedStatus,
+          assignUser: selectedUser,
         }),
       });
 
@@ -53,13 +55,12 @@ const ApplicationDetails = ({ isOpenApplication, setIsOpenApplication }) => {
           confirmButtonColor: "#000",
         });
 
-        setIsOpenApplication(false); // Close the modal
+        setIsOpenEnquiry(false); // Close the modal
       } else {
         Swal.fire({
           icon: "error",
           title: "Error!",
           text: "Failed to update status. Please try again.",
-            confirmButtonColor: "#000",
         });
       }
     } catch (error) {
@@ -67,7 +68,6 @@ const ApplicationDetails = ({ isOpenApplication, setIsOpenApplication }) => {
         icon: "error",
         title: "Error!",
         text: "Something went wrong. Please try again later.",
-          confirmButtonColor: "#000",
       });
       console.error("Error updating status:", error);
     }
@@ -75,31 +75,25 @@ const ApplicationDetails = ({ isOpenApplication, setIsOpenApplication }) => {
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black/30">
-      <div className="w-[70vw] h-[70vh] overflow-y-scroll max-w-[800px] bg-white rounded-lg shadow-2xl p-8">
+      <div className="w-[70vw] max-w-[800px] bg-white rounded-lg shadow-2xl p-8">
         {/* Header */}
         <div className="text-center mb-6">
-          <h2 className="text-3xl font-semibold text-gray-800">
-            Application Details  
+          <h2 className="text-3xl font-bold text-gray-800">
+            Enquiry Details {console.log(selectedUser)}
           </h2>
-          <p className="text-black">Review the details of the application below</p>
+          <p className="text-black">Review the details of the enquiry below</p>
         </div>
 
         {/* Content */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 text-gray-700">
           {[
-            { icon: FiFlag, label: "Name", value: firstName + " " + lastName },
+            { icon: FiFlag, label: "Name", value: name },
             { icon: FiMail, label: "Email", value: email },
             { icon: FiPhone, label: "Phone", value: phone },
-            { icon: FiBriefcase, label: "Position", value: position },
-            { icon: FiUserCheck, label: "Experience", value: experience },
-            { icon: FiMapPin, label: "Current Location", value: currentLocation },
-            { icon: FiLinkedin, label: "LinkedIn", value: linkedin },
-            { icon: FiGlobe, label: "Portfolio", value: portfolio },
-            { icon: FiFileText, label: "Resume", value: resume },
-            { icon: FiClock, label: "Added Time", value: addedTime },
-            { icon: FiMessageCircle, label: "Why Hire", value: coverLetter },
+            { icon: MdSubject, label: "Subject", value: subject },
+            { icon: LuMessageCircleMore, label: "Message", value: message },
           ].map(({ icon: Icon, label, value }, index) => (
-            <div className={label=='Why Hire'?"col-span-2":""}>
+            <div  className={label=='Message'?"col-span-2":""}>
               <div key={index} className="flex items-center gap-3">
                 <Icon className="text-black bg-gray-200 p-1 rounded-md text-2xl" />
                 <p>
@@ -134,13 +128,33 @@ const ApplicationDetails = ({ isOpenApplication, setIsOpenApplication }) => {
             </div>
           </div>
 
-        
+          {/* User assign Checkboxes */}
+          {/* <div className="space-y-2 w-full col-span-1 md:col-span-2">
+            <div className="flex items-center gap-3">
+              <TbStatusChange className="text-black bg-gray-200 p-1 rounded-md text-2xl" />
+              <strong className="block font-medium">User Assign:</strong>
+            </div>
+            <div className="flex gap-5 border-[1px] px-2 rounded-lg h-14 border-gray-300 text-sm py-3 justify-between">
+              {["Admin", "Content", "Sales"].map((type) => (
+                <label key={type} className="flex items-center gap-2 w-[30%]">
+                  <input
+                    type="checkbox"
+                    checked={selectedUser.includes(type)}
+                    onChange={() => handleAssignCheckboxChange(type)}
+                    className="w-5 h-5 cursor-pointer"
+                  />
+
+                  {type}
+                </label>
+              ))}
+            </div>
+          </div> */}
         </div>
 
         {/* Footer */}
         <div className="flex justify-between items-center mt-6">
           <button
-            onClick={() => setIsOpenApplication(false)}
+            onClick={() => setIsOpenEnquiry(false)}
             className="bg-gray-600 cursor-pointer text-white px-6 py-2 rounded-md shadow-md hover:bg-gray-700"
           >
             Close
@@ -158,4 +172,4 @@ const ApplicationDetails = ({ isOpenApplication, setIsOpenApplication }) => {
   );
 };
 
-export default ApplicationDetails;
+export default EnquiryDetails;

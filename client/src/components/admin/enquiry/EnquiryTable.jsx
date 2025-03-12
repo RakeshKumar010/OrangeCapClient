@@ -2,10 +2,13 @@ import { useEffect, useState } from "react";
 import { RiDeleteBin2Fill } from "react-icons/ri";
 import Swal from "sweetalert2";
 import * as XLSX from "xlsx";
+import { MdOutlinePreview } from "react-icons/md";
+import EnquiryDetails from "./EnquiryDetails";
 const baseUrl = import.meta.env.VITE_APP_URL;
 
 const EnquiryTable = ({ searchValue }) => {
   const [filter, setFilter] = useState("Recent");
+  const [isOpenEnquiry, setIsOpenEnquiry] = useState(false);
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [data, setData] = useState("");
   const [loading, setLoading] = useState();
@@ -231,10 +234,13 @@ const EnquiryTable = ({ searchValue }) => {
                   </th>
 
                   <th scope="col" className="px-6 py-3 ">
-                    subject
+                    Subject
                   </th>
                   <th scope="col" className="px-6 py-3">
-                    message
+                    Status
+                  </th>
+                  <th scope="col" className="px-6 py-3 ">
+                    Action
                   </th>
                 </tr>
               </thead>
@@ -245,7 +251,9 @@ const EnquiryTable = ({ searchValue }) => {
                       <>
                         <tr
                           key={index}
-                          className="bg-white border-b    hover:bg-gray-50 "
+                          className={` border-b     ${
+                            value.status == "Pending" ? "bg-white" : "bg-gray-200"
+                          }`}
                         >
                           <td className="w-4 p-4">
                             <div className="flex items-center">
@@ -283,8 +291,16 @@ const EnquiryTable = ({ searchValue }) => {
                             {value.subject ? value.subject : "no value"}
                           </td>
                           <td className="px-6 py-4 text-center">
-                            {value.message ? value.message : "no value"}
+                            {value.status ? value.status : "no value"}
                           </td>
+                          <td className="px-6 mx-auto text-center flex items-center justify-center py-4 text-nowrap">
+                          <MdOutlinePreview
+                            className="text-2xl text-black"
+                            onClick={() => {
+                              setIsOpenEnquiry(value); 
+                            }}
+                          />
+                        </td>
                         </tr>
                       </>
                     );
@@ -294,6 +310,13 @@ const EnquiryTable = ({ searchValue }) => {
           </div>
         </div>
       </div>
+      {isOpenEnquiry ? (
+        <EnquiryDetails
+          setIsOpenEnquiry={setIsOpenEnquiry}
+          isOpenEnquiry={isOpenEnquiry}
+          data={data}
+        />
+      ) : null}
     </>
   );
 };
