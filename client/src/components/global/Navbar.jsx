@@ -63,10 +63,17 @@ const Navbar = () => {
           </Link>
           <Link
             className="text-base font-medium leading-[1.3] hover:text-logoColor transition-colors duration-300"
+            to={"/career"}
+          >
+            Career
+          </Link>
+          <Link
+            className="text-base font-medium leading-[1.3] hover:text-logoColor transition-colors duration-300"
             to={"/contact"}
           >
             Contact
           </Link>
+        
         </div>
         <div className="flex gap-3 text-white">
           <svg

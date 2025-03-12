@@ -3,13 +3,17 @@ import { CgProfile } from "react-icons/cg";
 import { FiCompass } from "react-icons/fi";
 import { IoMenu } from "react-icons/io5";
 import { LuUserRoundPlus } from "react-icons/lu";
-import { 
+import {
+  MdAddChart,
   MdOutlineAdminPanelSettings,
   MdOutlineMarkUnreadChatAlt,
+  MdWorkOutline,
 } from "react-icons/md";
+import { FaRegFileAlt } from "react-icons/fa";
+
 import { RiLogoutCircleLine } from "react-icons/ri";
 import { Link, useNavigate } from "react-router-dom";
-import Logo from '../../../assets/image/dark-logo.png'
+import Logo from "../../../assets/image/dark-logo.png";
 const baseUrl = import.meta.env.VITE_APP_URL;
 
 const Sidebar = () => {
@@ -26,7 +30,18 @@ const Sidebar = () => {
           label: "Enquiries",
           link: "/enquiry",
         },
-        { icon: <MdOutlineAdminPanelSettings />, label: "Users", link: "/user" },
+        {
+          icon: <MdOutlineAdminPanelSettings />,
+          label: "Users",
+          link: "/user",
+        },
+      ],
+    },
+    {
+      title: "Job Opening",
+      items: [
+        { icon: <MdWorkOutline />, label: "Jobs", link: "/job" },
+        { icon: <FaRegFileAlt />, label: "Applications", link: "/application" },
       ],
     },
 
@@ -34,6 +49,7 @@ const Sidebar = () => {
       title: "Account",
       items: [
         { icon: <LuUserRoundPlus />, label: "Add User", link: "/add-user" },
+        { icon: <MdAddChart />, label: "Add Job", link: "/add-job" },
         { icon: <CgProfile />, label: "My Profile", link: "/my-profile" },
       ],
     },
@@ -66,7 +82,7 @@ const Sidebar = () => {
     <>
       <div className="thin-scrollbar hidden lg:block w-96 min-h-screen bg-white text-black overflow-auto shadow-lg">
         <div className="p-7">
-          <img src={Logo} alt="logo" className="w-40 mb-5"/>
+          <img src={Logo} alt="logo" className="w-40 mb-5" />
           {sections.map((section, index) => (
             <div key={index} className="pb-6">
               <p className="text-gray-900  uppercase mb-3">{section.title}</p>

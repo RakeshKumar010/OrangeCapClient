@@ -23,6 +23,11 @@ import User from "../components/admin/pages/User";
 import AddUser from "../components/admin/pages/AddUser";
 import PageTracker from "../components/global/PageTracker";
 import CookieConsent from "../components/global/CookieConsent";
+import Career from "../pages/Career";
+import ApplyPage from "../pages/ApplyPage";
+import AddJob from "../components/admin/pages/AddJob";
+import Job from "../components/admin/pages/Job";
+import JobApplication from "../components/admin/pages/JobApplication";
 
 const Layout = () => {
   const [isAdmin, setIsAdmin] = useState(false);
@@ -53,6 +58,8 @@ const Layout = () => {
           <Route path="/services" element={<Services />} />
           <Route path="/projects" element={<Projects />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/career" element={<Career />} />
+          <Route path="/apply/:title" element={<ApplyPage />} />
           <Route
             path="/terms-and-conditions"
             element={<TermsAndConditions />}
@@ -74,8 +81,12 @@ const Layout = () => {
           >
             <Route index element={<Dashboard />} />
             <Route path="enquiry" element={<Enquiry />} />
+            <Route path="application" element={<JobApplication />} />
             <Route path="user" element={<User />} />
+            <Route path="job" element={<Job />} />
             <Route path="add-user" element={<AddUser />} />
+            <Route path="add-job" element={<AddJob />} />
+            <Route path="job/:id" element={<AddJob action={"edit"} />} />
             <Route path="user/:id" element={<AddUser action={"edit"} />} />
             <Route path="my-profile" element={<MyProfile />} />
           </Route>

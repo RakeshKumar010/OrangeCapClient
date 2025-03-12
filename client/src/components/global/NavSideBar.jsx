@@ -1,6 +1,5 @@
- 
 import { Link } from "react-router-dom";
-import Logo from "../../assets/image/dark-logo.png"; 
+import Logo from "../../assets/image/dark-logo.png";
 
 const NavSideBar = ({ setIsNavOpen, isNavOpen }) => {
   return (
@@ -83,31 +82,43 @@ const NavSideBar = ({ setIsNavOpen, isNavOpen }) => {
                     data-orientation="vertical"
                     className=" "
                   >
-                    <Link to={'/'}
+                    <Link
+                      to={"/"}
                       className="flex-1 justify-between transition-all min-h-[3rem] inline-flex items-center border-gray-200/50 w-full gap-4 rounded-none border-b-0 px-5 text-left text-base 
                       text-white font-bold no-underline hover:no-underline border-t focus:text-logoColor active:text-logoColor [&[data-state='open']_.accordion-icon]:-rotate-180   [&[data-state='open']]:text-white [&[data-state='open']]:bg-logoColor"
                     >
                       Home
                     </Link>
-                    <Link to={'/about'}
+                    <Link
+                      to={"/about"}
                       className="flex-1 justify-between transition-all min-h-[3rem] inline-flex items-center border-gray-200/50 w-full gap-4 rounded-none border-b-0 px-5 text-left text-base 
                       text-white font-bold no-underline hover:no-underline border-t focus:text-logoColor active:text-logoColor [&[data-state='open']_.accordion-icon]:-rotate-180   [&[data-state='open']]:text-white [&[data-state='open']]:bg-logoColor"
                     >
                       About
                     </Link>
-                    <Link to={'/services'}
+                    <Link
+                      to={"/services"}
                       className="flex-1 justify-between transition-all min-h-[3rem] inline-flex items-center border-gray-200/50 w-full gap-4 rounded-none border-b-0 px-5 text-left text-base 
                       text-white font-bold no-underline hover:no-underline border-t focus:text-logoColor active:text-logoColor [&[data-state='open']_.accordion-icon]:-rotate-180   [&[data-state='open']]:text-white [&[data-state='open']]:bg-logoColor"
                     >
                       Service
                     </Link>
-                    <Link to={'/projects'}
+                    <Link
+                      to={"/projects"}
                       className="flex-1 justify-between transition-all min-h-[3rem] inline-flex items-center border-gray-200/50 w-full gap-4 rounded-none border-b-0 px-5 text-left text-base 
                       text-white font-bold no-underline hover:no-underline border-t focus:text-logoColor active:text-logoColor [&[data-state='open']_.accordion-icon]:-rotate-180   [&[data-state='open']]:text-white [&[data-state='open']]:bg-logoColor"
                     >
                       Project
                     </Link>
-                    <Link to={'/contact'}
+                    <Link
+                      to={"/career"}
+                      className="flex-1 justify-between transition-all min-h-[3rem] inline-flex items-center border-gray-200/50 w-full gap-4 rounded-none border-b-0 px-5 text-left text-base 
+                      text-white font-bold no-underline hover:no-underline border-t focus:text-logoColor active:text-logoColor [&[data-state='open']_.accordion-icon]:-rotate-180   [&[data-state='open']]:text-white [&[data-state='open']]:bg-logoColor"
+                    >
+                      Career
+                    </Link>
+                    <Link
+                      to={"/contact"}
                       className="flex-1 justify-between transition-all min-h-[3rem] inline-flex items-center border-gray-200/50 w-full gap-4 rounded-none border-b-0 px-5 text-left text-base 
                       text-white font-bold no-underline hover:no-underline border-t focus:text-logoColor active:text-logoColor [&[data-state='open']_.accordion-icon]:-rotate-180   [&[data-state='open']]:text-white [&[data-state='open']]:bg-logoColor"
                     >
@@ -194,7 +205,7 @@ const NavSideBar = ({ setIsNavOpen, isNavOpen }) => {
                         </svg>
                       </span>
                       <address className="transition-colors text-white duration-300 hover:text-logoColor/10 not-italic">
-                      G1 & G2, Solus Complex, Marunji, Pune, 411057
+                        G1 & G2, Solus Complex, Marunji, Pune, 411057
                       </address>
                     </li>
                   </ul>
