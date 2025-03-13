@@ -30,7 +30,7 @@ const Job = () => {
             />
           </div>
           <Link
-            to={"/admin/add-user"}
+            to={"/admin/add-job"}
             className="text-[15px] px-2 md:px-5 py-4 flex items-center bg-black rounded-lg text-white"
           >
             Add New <GoArrowUpRight className="text-xl" />
